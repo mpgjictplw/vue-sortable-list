@@ -88,7 +88,38 @@ src/types.ts        option and axis types
 src/pointer.ts      slot geometry and insertion resolution
 src/useSortable.ts  the composable
 src/index.ts        public entry
+src/accessibility/  keyboard reorder path
 ```
+
+## Keyboard
+
+`useSortableKeyboard` adds a second path that does not need a pointer:
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useSortableKeyboard } from 'vue-sortable-list'
+
+const tasks = ref(['Triage', 'Patch', 'Deploy'])
+const { itemAttrs, pickedIndex, previewIndex } = useSortableKeyboard({
+  items: tasks,
+  label: (task) => task,
+  onReorder: (from, to) => tasks.value.splice(to, 0, ...tasks.value.splice(from, 1)),
+})
+</script>
+
+<template>
+  <ul>
+    <li v-for="(task, index) in tasks" :key="task" v-bind="itemAttrs(index)">{{ task }}</li>
+  </ul>
+  <p aria-live="polite">{{ pickedIndex ?? 'nothing picked' }}</p>
+</template>
+```
+
+Space or Enter picks the focused item up, arrows move a preview slot, Space or Enter
+drops, Escape restores the original position. `aria-pressed`, `aria-posinset` and
+`aria-setsize` are set for you; feed the announcement messages to a `aria-live` region.
+Pass `orientation: 'horizontal'` to swap the arrow pair.
 
 ## Gotchas
 
