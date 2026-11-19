@@ -1,0 +1,27 @@
+{
+  "name": "vue-sortable-list",
+  "version": "0.3.0",
+  "description": "Pointer-driven sortable list composable for Vue 3 with a predictable reorder contract",
+  "type": "module",
+  "license": "MIT",
+  "author": "Anouk de Vries",
+  "homepage": "https://mpgjictplw.github.io",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "peerDependencies": {
+    "vue": "^3.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vue": "^3.5.0",
+    "vue-tsc": "^2.1.0"
+  }
+}
